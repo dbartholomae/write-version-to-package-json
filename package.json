@@ -1,0 +1,60 @@
+{
+  "name": "write-version-to-package-json",
+  "description": "Loads the current version from the npm registry and writes it to package.json",
+  "keywords": [
+    "npm"
+  ],
+  "homepage": "https://github.com/dbartholomae/write-version-to-package-json",
+  "bugs": "https://github.com/dbartholomae/write-version-to-package-json/issues",
+  "license": "MIT",
+  "author": "Daniel Bartholomae <daniel@bartholomae.name>",
+  "dependencies": {
+    "commander": "^2.9.0"
+  },
+  "devDependencies": {
+    "npm-build-tools": "*",
+    "nodemon": "*",
+    "ghooks": "*",
+    "validate-commit-msg": "*",
+    "semantic-release": "^4.3.5",
+    "coveralls": "*",
+    "coffeelint": "*",
+    "coffeelint-no-mocha-only": "*",
+    "coffee-script": "1.*",
+    "nsp": "*",
+    "mocha": "*",
+    "mocha-istanbul": "*",
+    "istanbul": "*",
+    "chai": "*"
+  },
+  "main": "lib/script.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dbartholomae/write-version-to-package-json.git"
+  },
+  "config": {
+    "ghooks": {
+      "pre-commit": "npm run lint && npm run test",
+      "commit-msg": "validate-commit-msg"
+    }
+  },
+  "scripts": {
+    "pretest": "npm run build && istanbul instrument lib/run.js | n-pipe lib-cov/run.js",
+    "test": "npm run test:nsp && npm run test:mocha",
+    "test:nsp": "nsp check",
+    "test:mocha": "istanbul cover ./node_modules/mocha/bin/_mocha -- --compilers coffee:coffee-script/register",
+    "lint": "coffeelint -f .coffeelint.json src/ test/",
+
+    "build": "coffee -c -o lib/ src/",
+
+    "watch": "npm run pretest && n-run \"npm run watch:pretest\" \"npm run watch:test\"",
+    "watch:pretest": "nodemon --watch src/ --exec npm run pretest",
+    "watch:test": "mocha --compilers coffee:coffee-script/register --check-leaks",
+
+    "semantic-release": "semantic-release pre && npm publish && semantic-release post",
+    "coveralls": "cat coverage/lcov.info | coveralls",
+
+    "update-changelog": "conventional-changelog -p angular -i CHANGELOG.md -w",
+    "commit-changelog": "git commit CHANGELOG.md -n -m \"docs: update changelog\" || echo \"No changes committed\""
+  }
+}
