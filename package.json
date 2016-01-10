@@ -46,6 +46,7 @@
   "scripts": {
     "pretest": "npm run build",
     "test": "npm run test:nsp && npm run test:mocha",
+    "posttest": "istanbul check-coverage --statements 90",
     "test:nsp": "nsp check",
     "test:mocha": "istanbul cover ./node_modules/mocha/bin/_mocha -- --compilers coffee:coffee-script/register",
     "lint": "coffeelint -f .coffeelint.json src/ test/",
