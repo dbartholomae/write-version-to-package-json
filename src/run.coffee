@@ -17,13 +17,13 @@ version = Promise.props
     lastRelease null, cfg, cb
 .get 'version'
 .catch (err) ->
-  throw err
+  console.error err
   process.exitCode = 1
 
 pkg = fs.readFileAsync './package.json', { encoding: 'utf-8' }
 .then JSON.parse
 
-Promise.join pkg, version, (pkg, version) ->
+module.exports = Promise.join pkg, version, (pkg, version) ->
   pkg.version = version
   return pkg
 .then (pkg) ->
