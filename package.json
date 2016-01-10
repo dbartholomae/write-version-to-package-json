@@ -32,7 +32,10 @@
     "proxyquire": "*",
     "mock-fs": "*"
   },
-  "main": "lib/script.js",
+  "main": "lib/lib.js",
+  "bin": {
+    "write-version-to-package-json": "./bin/write-version-to-package-json.js"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/dbartholomae/write-version-to-package-json.git"
