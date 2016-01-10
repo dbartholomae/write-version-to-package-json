@@ -2,6 +2,7 @@ chai = require 'chai'
 chai.use require 'sinon-chai'
 expect = chai.expect
 sinon = require 'sinon'
+domain = require 'domain'
 
 proxyquire = require 'proxyquire'
 mockFs = require 'mock-fs'
@@ -29,9 +30,7 @@ describe "write-version-to-package-json", ->
     proxyquire '../lib/run.js',
       '@semantic-release/last-release-npm': lastRelease
       'fs': fs
-
-    # Check
-    expects = ->
+    .then ->
       expect(lastRelease.args[0][1]).to.deep.equal
         pkg: pkg
         npm:
@@ -46,4 +45,17 @@ describe "write-version-to-package-json", ->
 
       done()
 
-    setTimeout expects, 100
+  it "throws an error if anything goes wrong", (done) ->
+    # Setup
+    pkg =
+      name: "ModuleName"
+    fs.writeFileSync './package.json', JSON.stringify pkg
+
+    lastRelease.yields "Some Error"
+
+    proxyquire '../lib/run.js',
+      '@semantic-release/last-release-npm': lastRelease
+      'fs': fs
+    .then ->
+      expect(process.exitCode).to.equal 1
+      done()
