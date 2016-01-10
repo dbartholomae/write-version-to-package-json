@@ -7,3 +7,6 @@
 [![GitHub license](https://img.shields.io/github/license/dbartholomae/write-version-to-package-json.svg)]()
 
 **write-version-to-package-json** reads the most recent version for a package from the npm registry and writes it into `package.json`. 
+
+## Example
+`write-version-to-package-json && conventional-changelog`
