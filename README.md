@@ -1,4 +1,5 @@
 # write-version-to-package-json
+## !!! This package is no longer maintained !!!
 [![NPM version](https://badge.fury.io/js/write-version-to-package-json.svg)](https://npmjs.org/package/write-version-to-package-json)
 [![Build Status](https://travis-ci.org/dbartholomae/write-version-to-package-json.svg?branch=master)](https://travis-ci.org/dbartholomae/write-version-to-package-json)
 [![Coverage Status](https://coveralls.io/repos/dbartholomae/write-version-to-package-json/badge.svg?branch=master&service=github)](https://coveralls.io/github/dbartholomae/write-version-to-package-json?branch=master)
