@@ -10,14 +10,14 @@
   "author": "Daniel Bartholomae <daniel@bartholomae.name>",
   "dependencies": {
     "bluebird": "^3.1.1",
-    "@semantic-release/last-release-npm": "^1.2.1"
+    "@semantic-release/last-release-npm": "^2.0.2"
   },
   "devDependencies": {
     "npm-build-tools": "*",
     "nodemon": "*",
     "ghooks": "*",
     "validate-commit-msg": "*",
-    "semantic-release": "^4.3.5",
+    "semantic-release": "^15.10.4",
     "coveralls": "*",
     "coffeelint": "*",
     "coffeelint-no-mocha-only": "*",
